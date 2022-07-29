@@ -14,3 +14,5 @@ const factory = () => {
 };
 
 car.post('/', factory().create);
+
+export default car;
