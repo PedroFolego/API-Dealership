@@ -43,12 +43,12 @@ describe('Car Service', () => {
       }
     })
   })
-  // describe('Finding Cars', () => {
-  //   it('Successfully finded', async () => {
-  //     const cars = await carModel.read();
-  //     expect(cars).to.be.eql(carsMock);
-  //   });
-  // })
+  describe('Finding Cars', () => {
+    it('Successfully finded', async () => {
+      const cars = await carService.read();
+      expect(cars).to.be.eql(carsMock);
+    });
+  })
   // describe('Finding One Car', () => {
   //   it('Successfully finded', async () => {
   //     const car = await carModel.readOne('4edd40c86762e0fb12000003');
