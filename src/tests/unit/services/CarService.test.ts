@@ -23,6 +23,9 @@ describe('Car Service', () => {
     sinon
       .stub(carModel, 'readOne')
       .resolves(carMockWithId);
+    sinon
+      .stub(carModel, 'update')
+      .resolves(carMockWithId);
   });
 
   after(()=>{
@@ -68,19 +71,33 @@ describe('Car Service', () => {
       }
     })
   })
-  // describe('Updating One Car', () => {
-  //   it('Successfully updated', async () => {
-  //     const car = await carModel.update('4edd40c86762e0fb12000003', carMock);
-  //     expect(car).to.be.eql(carMockWithId);
-  //   });
-  //   it('_id not found', async () => {
-  //     try {
-  //     await carModel.readOne('INVALIDID123');
-  //     } catch (error: any) {
-  //       expect(error.message).to.be.eq('InvalidMongoId')
-  //     }
-  //   })
-  // })
+  describe('Updating One Car', () => {
+    it('Successfully updated', async () => {
+      const car = await carService.update('4edd40c86762e0fb12000003', carMock);
+      expect(car).to.be.eql(carMockWithId);
+    });
+    it('_id not found', async () => {
+      try {
+      await carService.update('INVALIDID123', carMock);
+      } catch (error: any) {
+        expect(error.message).to.be.eq('InvalidMongoId')
+      }
+    })
+    it('Failure creating vehicle', async () => {
+      try {
+        await carService.update('4edd40c86762e0fb12000003', {} as any);
+      } catch (error) {
+        expect(error).to.be.instanceOf(ZodError);
+      }
+    });
+    it('Failure creating car', async () => {
+      try {
+        await carService.update('4edd40c86762e0fb12000003', vehicleMock as any);
+      } catch (error) {
+        expect(error).to.be.instanceOf(ZodError);
+      }
+    })
+  })
   // describe('Deleting Car', () => {
   //   it('Successfully deleted', async () => {
   //     const car = await carModel.delete('4edd40c86762e0fb12000003');
