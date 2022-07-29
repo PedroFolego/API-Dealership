@@ -13,7 +13,7 @@ export type ErrorCatalog = {
 
 export const errorCatalog: ErrorCatalog = {
   InvalidMongoId: {
-    message: 'Invalid Id',
+    message: 'Id must have 24 hexadecimal characters',
     httpStatus: 400,
   },
 };

@@ -17,7 +17,7 @@ class CarController {
     return res.status(201).json(car);
   };
 
-  read = async (req: Request, res: Response) => {
+  read = async (_req: Request, res: Response) => {
     const cars = await this.#service.read();
     return res.status(200).json(cars);
   };

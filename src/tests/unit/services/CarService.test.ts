@@ -17,6 +17,12 @@ describe('Car Service', () => {
     sinon
       .stub(carModel, 'create')
       .resolves(carMockWithId);
+    sinon
+      .stub(carModel, 'read')
+      .resolves(carsMock);
+    sinon
+      .stub(carModel, 'readOne')
+      .resolves(carMockWithId);
   });
 
   after(()=>{
@@ -49,19 +55,19 @@ describe('Car Service', () => {
       expect(cars).to.be.eql(carsMock);
     });
   })
-  // describe('Finding One Car', () => {
-  //   it('Successfully finded', async () => {
-  //     const car = await carModel.readOne('4edd40c86762e0fb12000003');
-  //     expect(car).to.be.eql(carMockWithId);
-  //   });
-  //   it('_id not found', async () => {
-  //     try {
-  //     await carModel.readOne('INVALIDID123');
-  //     } catch (error: any) {
-  //       expect(error.message).to.be.eq('InvalidMongoId')
-  //     }
-  //   })
-  // })
+  describe('Finding One Car', () => {
+    it('Successfully finded', async () => {
+      const car = await carService.readOne('4edd40c86762e0fb12000003');
+      expect(car).to.be.eql(carMockWithId);
+    });
+    it('_id not found', async () => {
+      try {
+      await carService.readOne('INVALIDID123');
+      } catch (error: any) {
+        expect(error.message).to.be.eq('InvalidMongoId')
+      }
+    })
+  })
   // describe('Updating One Car', () => {
   //   it('Successfully updated', async () => {
   //     const car = await carModel.update('4edd40c86762e0fb12000003', carMock);
