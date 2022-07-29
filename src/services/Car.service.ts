@@ -22,6 +22,10 @@ class CarService implements IService<ICar> {
   async read(): Promise<ICar[]> {
     return this.#model.read();
   }
+
+  async readOne(_id: string): Promise<ICar | null> {
+    return this.#model.readOne(_id);
+  }
 }
 
 export default CarService;
