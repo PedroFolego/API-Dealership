@@ -10,11 +10,11 @@ class CarService implements IService<ICar> {
   }
 
   async create(obj: ICar): Promise<ICar> {
-    const parsedCar = CarSchema.safeParse(obj);
-    if (!parsedCar.success) throw parsedCar.error;
-
     const parsedVehicle = VehicleSchema.safeParse(obj);
     if (!parsedVehicle.success) throw parsedVehicle.error;
+    
+    const parsedCar = CarSchema.safeParse(obj);
+    if (!parsedCar.success) throw parsedCar.error;
 
     return this.#model.create(obj);
   }

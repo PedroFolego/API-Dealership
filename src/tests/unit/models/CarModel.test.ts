@@ -3,6 +3,7 @@ import chai from 'chai';
 import CarModel from '../../../models/Car.model';
 import { Model } from 'mongoose';
 import { carMock, carMockWithId, carsMock } from '../../mocks/CarMock';
+import { ErroTypes } from '../../../error/catalog';
 const { expect } = chai;
 
 describe('Car Model', () => {
@@ -11,7 +12,7 @@ describe('Car Model', () => {
   before(async () => {
     sinon
       .stub(Model, 'create')
-      .resolves(carMock);
+      .resolves(carMockWithId);
     sinon
       .stub(Model, 'find')
       .resolves(carsMock);
@@ -32,7 +33,7 @@ describe('Car Model', () => {
   describe('Creatiing Car', () => {
     it('Successfully created', async () => {
       const newCar = await carModel.create(carMock);
-      expect(newCar).to.be.eql(carMock);
+      expect(newCar).to.be.eql(carMockWithId);
     });
   })
   describe('Finding Cars', () => {
@@ -51,6 +52,7 @@ describe('Car Model', () => {
       await carModel.readOne('INVALIDID123');
       } catch (error: any) {
         expect(error.message).to.be.eq('InvalidMongoId')
+        expect(error).to.be.instanceOf(ErroTypes);
       }
     })
   })
@@ -63,7 +65,8 @@ describe('Car Model', () => {
       try {
       await carModel.readOne('INVALIDID123');
       } catch (error: any) {
-        expect(error.message).to.be.eq('InvalidMongoId')
+        expect(error.message).to.be.eq('InvalidMongoId');
+        expect(error).to.be.instanceOf(ErroTypes);
       }
     })
   })
@@ -77,6 +80,7 @@ describe('Car Model', () => {
       await carModel.readOne('INVALIDID123');
       } catch (error: any) {
         expect(error.message).to.be.eq('InvalidMongoId')
+        expect(error).to.be.instanceOf(ErroTypes);
       }
     })
   })
