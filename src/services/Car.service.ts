@@ -26,6 +26,15 @@ class CarService implements IService<ICar> {
   async readOne(_id: string): Promise<ICar | null> {
     return this.#model.readOne(_id);
   }
+  async update(_id: string, obj: ICar): Promise<ICar | null> {
+    const parsedVehicle = VehicleSchema.safeParse(obj);
+    if (!parsedVehicle.success) throw parsedVehicle.error;
+    
+    const parsedCar = CarSchema.safeParse(obj);
+    if (!parsedCar.success) throw parsedCar.error;
+    
+    return this.#model.update(_id, obj);
+  }
 }
 
 export default CarService;

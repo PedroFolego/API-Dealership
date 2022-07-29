@@ -14,5 +14,8 @@ const factory = () => {
 };
 
 car.post('/', factory().create);
+car.get('/', factory().read);
+car.get('/:id', factory().readOne);
+car.put('/:id', factory().update);
 
 export default car;

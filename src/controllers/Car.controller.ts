@@ -29,6 +29,25 @@ class CarController {
     if (!car) throw Error(ErroTypes.NotFound);
     return res.status(200).json(car);
   };
+
+  update = async (req: Request & { body: ICar }, res: Response) => {
+    const { id } = req.params;
+    const { model, year, color,
+      status, buyValue, seatsQty, doorsQty,
+    } = req.body;
+    const newCar = {
+      model,
+      year,
+      color,
+      status,
+      buyValue,
+      seatsQty,
+      doorsQty,
+    };
+    const car = await this.#service.update(id, newCar);
+    if (!car) throw Error(ErroTypes.NotFound);
+    return res.status(200).json(car);
+  };
 }
 
 export default CarController;
