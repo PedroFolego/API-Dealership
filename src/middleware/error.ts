@@ -1,5 +1,6 @@
 import { ErrorRequestHandler, NextFunction, Request, Response } from 'express';
 import { ZodError } from 'zod';
+import { errorCatalog, ErroTypes } from '../error/catalog';
 
 const errorHandler: ErrorRequestHandler = (
   err: Error | ZodError,
@@ -10,8 +11,15 @@ const errorHandler: ErrorRequestHandler = (
   if (err instanceof ZodError) {
     return res.status(400).json({ message: err.issues });
   }
-  console.error(err);
 
+  const messageErrorType = err.message as keyof typeof ErroTypes;
+  const mappedError = errorCatalog[messageErrorType];
+  if (mappedError) {
+    const { httpStatus, message } = mappedError;
+    return res.status(httpStatus).json({ message });
+  }
+
+  console.error(err);
   return res.status(500).json({ message: 'Internal Server Error' });
 };
 
