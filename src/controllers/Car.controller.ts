@@ -1,4 +1,5 @@
 import { Request, Response } from 'express';
+import { ErroTypes } from '../error/catalog';
 import { ICar } from '../interfaces/ICar';
 import { IService } from '../interfaces/IService';
 
@@ -25,7 +26,7 @@ class CarController {
   readOne = async (req: Request, res: Response) => {
     const { id } = req.params;
     const car = await this.#service.readOne(id);
-    if (!car) return res.status(404).json({ message: 'Object not found' });
+    if (!car) throw Error(ErroTypes.NotFound);
     return res.status(200).json(car);
   };
 }
