@@ -77,7 +77,7 @@ describe('Car Model', () => {
     });
     it('_id not found', async () => {
       try {
-      await carModel.readOne('INVALIDID123');
+      await carModel.delete('INVALIDID123');
       } catch (error: any) {
         expect(error.message).to.be.eq('InvalidMongoId')
         expect(error).to.be.instanceOf(ErroTypes);

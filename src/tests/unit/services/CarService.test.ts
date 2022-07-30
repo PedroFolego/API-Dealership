@@ -26,6 +26,9 @@ describe('Car Service', () => {
     sinon
       .stub(carModel, 'update')
       .resolves(carMockWithId);
+    sinon
+      .stub(carModel, 'delete')
+      .resolves(carMockWithId);
   });
 
   after(()=>{
@@ -98,17 +101,17 @@ describe('Car Service', () => {
       }
     })
   })
-  // describe('Deleting Car', () => {
-  //   it('Successfully deleted', async () => {
-  //     const car = await carModel.delete('4edd40c86762e0fb12000003');
-  //     expect(car).to.be.eql(carMockWithId);
-  //   });
-  //   it('_id not found', async () => {
-  //     try {
-  //     await carModel.readOne('INVALIDID123');
-  //     } catch (error: any) {
-  //       expect(error.message).to.be.eq('InvalidMongoId')
-  //     }
-  //   })
-  // })
+  describe('Deleting Car', () => {
+    it('Successfully deleted', async () => {
+      const car = await carService.delete('4edd40c86762e0fb12000003');
+      expect(car).to.be.eql(carMockWithId);
+    });
+    it('_id not found', async () => {
+      try {
+      await carService.delete('INVALIDID123');
+      } catch (error: any) {
+        expect(error.message).to.be.eq('InvalidMongoId')
+      }
+    })
+  })
 });
