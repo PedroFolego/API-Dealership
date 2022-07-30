@@ -60,6 +60,12 @@ class CarController {
     if (!car) throw Error(ErroTypes.NotFound);
     return res.status(200).json(car);
   };
+  delete = async (req: Request, res: Response) => {
+    const { id } = req.params;
+    const car = await this.#service.delete(id);
+    if (!car) throw Error(ErroTypes.NotFound);
+    return res.status(204).end();
+  };
 }
 
 export default CarController;

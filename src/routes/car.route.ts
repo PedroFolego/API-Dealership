@@ -17,5 +17,6 @@ car.post('/', factory().create);
 car.get('/', factory().read);
 car.get('/:id', factory().readOne);
 car.put('/:id', factory().update);
+car.delete('/:id', factory().delete);
 
 export default car;

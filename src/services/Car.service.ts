@@ -32,8 +32,12 @@ class CarService implements IService<ICar> {
     
     const parsedCar = CarSchema.safeParse(obj);
     if (!parsedCar.success) throw parsedCar.error;
-    
+
     return this.#model.update(_id, obj);
+  }
+
+  async delete(_id: string): Promise<ICar | null> {
+    return this.#model.delete(_id);
   }
 }
 
