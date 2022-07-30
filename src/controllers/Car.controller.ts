@@ -14,7 +14,19 @@ class CarController {
     req: Request & { body: ICar }, 
     res: Response, 
   ) => {
-    const car = await this.#service.create(req.body);
+    const { model, year, color, status, 
+      buyValue, seatsQty, doorsQty,
+    } = req.body;
+    const newCar = {
+      model,
+      year,
+      color,
+      status,
+      buyValue,
+      seatsQty,
+      doorsQty,
+    };
+    const car = await this.#service.create(newCar);
     return res.status(201).json(car);
   };
 
@@ -32,8 +44,8 @@ class CarController {
 
   update = async (req: Request & { body: ICar }, res: Response) => {
     const { id } = req.params;
-    const { model, year, color,
-      status, buyValue, seatsQty, doorsQty,
+    const { model, year, color, status,
+      buyValue, seatsQty, doorsQty,
     } = req.body;
     const newCar = {
       model,

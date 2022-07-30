@@ -10,6 +10,8 @@ const carMongooseSchema = new Schema<ICar>({
   buyValue: Number,
   doorsQty: Number,
   seatsQty: Number,
+}, {
+  versionKey: false, // https://stackoverflow.com/questions/12495891/what-is-the-v-field-in-mongoose
 });
 
 class CarModel extends MongoModel<ICar> {
