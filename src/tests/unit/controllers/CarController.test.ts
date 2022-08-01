@@ -62,7 +62,7 @@ describe('Car Controller', () => {
   })
   describe('Finding One Car', () => {
     it('Finded', async () => {
-      req.params.id = '4edd40c86762e0fb12000003' as any;
+      req.params = '4edd40c86762e0fb12000003' as any;
       await carController.readOne(req, res);
 
       expect((res.status as sinon.SinonStub).calledWith(200)).to.be.true;
@@ -72,7 +72,7 @@ describe('Car Controller', () => {
   describe('Update Car', () => {
     it('Sucess', async () => {
       req.body = carMock;
-      req.params.id = '4edd40c86762e0fb12000003' as any;
+      req.params = '4edd40c86762e0fb12000003' as any;
       await carController.update(req, res);
 
       expect((res.status as sinon.SinonStub).calledWith(200)).to.be.true;
@@ -81,7 +81,7 @@ describe('Car Controller', () => {
   })
   describe('Deleting One Car', () => {
     it('Deleted', async () => {
-      req.params.id = '4edd40c86762e0fb12000003' as any;
+      req.params = '4edd40c86762e0fb12000003' as any;
       await carController.delete(req, res);
 
       expect((res.status as sinon.SinonStub).calledWith(204)).to.be.true;

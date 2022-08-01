@@ -64,7 +64,7 @@ class CarController {
     const { id } = req.params;
     const car = await this.#service.delete(id);
     if (!car) throw Error(ErroTypes.NotFound);
-    return res.status(204).end();
+    return res.status(204).json({});
   };
 }
 
