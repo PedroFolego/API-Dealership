@@ -53,6 +53,7 @@ describe('Car Model', () => {
       } catch (error: any) {
         expect(error.message).to.be.eq('InvalidMongoId')
         expect(error).to.be.instanceOf(ErroTypes);
+        expect(error.message).to.be.a('string');
       }
     })
   })
@@ -67,6 +68,7 @@ describe('Car Model', () => {
       } catch (error: any) {
         expect(error.message).to.be.eq('InvalidMongoId');
         expect(error).to.be.instanceOf(ErroTypes);
+        expect(error.message).to.be.a('string');
       }
     })
   })
@@ -81,6 +83,7 @@ describe('Car Model', () => {
       } catch (error: any) {
         expect(error.message).to.be.eq('InvalidMongoId')
         expect(error).to.be.instanceOf(ErroTypes);
+        expect(error.message).to.be.a('string');
       }
     })
   })

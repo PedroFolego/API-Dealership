@@ -8,6 +8,7 @@ import CarService from '../../../services/Car.service';
 import CarController from '../../../controllers/Car.controller';
 import { carMock, carMockWithId, carsMock } from '../../mocks/CarMock';
 import { NextFunction, Request, Response } from 'express';
+import { ErroTypes } from '../../../error/catalog';
 const { expect } = chai;
 
 describe('Car Controller', () => {
@@ -27,13 +28,16 @@ describe('Car Controller', () => {
       .resolves(carsMock);
     sinon
       .stub(carService, 'readOne')
-      .resolves(carMock);
+      .onCall(0).resolves(carMock)
+      .onCall(1).resolves(null);
     sinon
       .stub(carService, 'update')
-      .resolves(carMock);
+      .onCall(0).resolves(carMock)
+      .onCall(1).resolves(null);
     sinon
       .stub(carService, 'delete')
-      .resolves(carMock);
+      .onCall(0).resolves(carMock)
+      .onCall(1).resolves(null);
 
     res.status = sinon.stub().returns(res);
     res.json = sinon.stub().returns(res);
@@ -68,6 +72,14 @@ describe('Car Controller', () => {
       expect((res.status as sinon.SinonStub).calledWith(200)).to.be.true;
       expect((res.json as sinon.SinonStub).calledWith(carMock)).to.be.true;
     })
+    it('Not Finded', async () => {
+      try {
+        req.params = '4edd40c86762e0fb12000003' as any;
+        await carController.readOne(req, res);
+      } catch (error: any) {
+				expect(error.message).to.be.deep.equal(ErroTypes.NotFound);
+      }
+    })
   })
   describe('Update Car', () => {
     it('Sucess', async () => {
@@ -78,6 +90,14 @@ describe('Car Controller', () => {
       expect((res.status as sinon.SinonStub).calledWith(200)).to.be.true;
       expect((res.json as sinon.SinonStub).calledWith(carMockWithId)).to.be.true;
     });
+    it('Not Finded', async () => {
+      try {
+        req.params = '4edd40c86762e0fb12000003' as any;
+        await carController.readOne(req, res);
+      } catch (error: any) {
+				expect(error.message).to.be.deep.equal(ErroTypes.NotFound);
+      }
+    })
   })
   describe('Deleting One Car', () => {
     it('Deleted', async () => {
@@ -85,6 +105,14 @@ describe('Car Controller', () => {
       await carController.delete(req, res);
 
       expect((res.status as sinon.SinonStub).calledWith(204)).to.be.true;
+    })
+    it('Not Finded', async () => {
+      try {
+        req.params = '4edd40c86762e0fb12000003' as any;
+        await carController.readOne(req, res);
+      } catch (error: any) {
+				expect(error.message).to.be.deep.equal(ErroTypes.NotFound);
+      }
     })
   })
 });
