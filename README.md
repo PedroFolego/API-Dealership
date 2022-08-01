@@ -9,7 +9,7 @@ sendo possível realizar as operações que se pode fazer em um banco de dados: 
 
 ## Técnologias usadas
 
-> Desenvolvido usando: NodeJS, ExpressJS, Moongose, ES6, TypeScript, Mocha | Chai | Sinon
+> Desenvolvido usando: NodeJS, ExpressJS, Mongoose, ES6, TypeScript, Mocha | Chai | Sinon
 
 ## Instalando Dependências usando Docker
 
