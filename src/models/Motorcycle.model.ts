@@ -8,7 +8,7 @@ const motorcycleMongooseSchema = new Schema<IMotorcycle>({
   color: String,
   status: Boolean,
   buyValue: Number,
-  category: String,
+  category: { type: String, required: true },
   engineCapacity: Number,
 
 }, {
