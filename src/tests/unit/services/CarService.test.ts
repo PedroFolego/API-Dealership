@@ -35,7 +35,7 @@ describe('Car Service', () => {
     sinon.restore();
   })
 
-  describe('Creatiing Car', () => {
+  describe('Creating Car', () => {
     it('Successfully created', async () => {
       const newCar = await carService.create(carMock);
       expect(newCar).to.be.eql(carMockWithId);
