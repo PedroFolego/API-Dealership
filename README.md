@@ -30,5 +30,5 @@ sendo possível realizar as operações que se pode fazer em um banco de dados: 
 
 ```
   cd API-Dealership
-  npm test
+  npm run test:dev
  ```
